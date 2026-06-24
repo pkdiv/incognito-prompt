@@ -24,11 +24,27 @@ Since Incognito Prompt is currently in active development, you can load it local
 ## Project Structure
 
 ```text
-├── manifest.json       # Extension configuration & permissions
-├── content.js          # Core logic intercepting & sanitizing paste events
-├── agents.md           # Instructions and context for AI coding assistants
+├── manifest.json       # Extension configuration & permissions (MV3)
+├── content.js          # Core paste interception & sanitization logic
+├── background.js       # Service worker — sets defaults on install
+├── popup.html          # Toolbar popup — toggle & mode selector
+├── popup.js            # Popup logic
+├── options.html        # Full settings page (custom matchlist, site selection)
+├── options.js          # Options page logic
+├── icons/              # Extension icons (16, 48, 128 px)
+│   ├── icon16.png
+│   ├── icon48.png
+│   └── icon128.png
+├── AGENTS.ms           # Context & guidelines for AI coding assistants
 └── README.md           # Project documentation
 ```
+
+## Permissions
+
+Incognito Prompt requests the following permissions:
+- **clipboardRead** — needed to intercept and read pasted content
+- **clipboardWrite** — required for manifest integrity (reserved for future use; current sanitization inserts text directly without clipboard modification)
+- **storage** — persists your preferences (mode, matchlist, toggles) locally using `chrome.storage.local`
 
 ## Privacy & Security
 

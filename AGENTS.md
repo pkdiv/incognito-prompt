@@ -13,8 +13,8 @@ Incognito Prompt is a browser extension that sanitizes prompts pasted into LLMs.
 
 ## Core Regex Patterns (Current Implementation)
 
-- **Unix/macOS Paths:** `/(?:\.\.\/|\.\/|\/)[a-zA-Z0-9_\-\s./]+(?:\/[a-zA-Z0-9_\-\s.]+)+/g`
-- **Windows Paths:** `/[a-zA-Z]:\\[a-zA-Z0-9_\-\s.\\]+(?:\\[a-zA-Z0-9_\-\s.]+)+/g`
+- **Unix/macOS Paths:** `/(?:\.\.\/|\.\/|\/)[a-zA-Z0-9_\-.\/]+(?:\/[a-zA-Z0-9_\-.\/]+)+/g`
+- **Windows Paths:** `/[a-zA-Z]:\\[a-zA-Z0-9_\-.\\)]+(?:\\[a-zA-Z0-9_\-.\\)]+)+/g`
 
 ### Rules for Updating Regex
 - **Avoid False Positives:** Ensure path-matching logic ignores valid web URLs (`http://`, `https://`).
