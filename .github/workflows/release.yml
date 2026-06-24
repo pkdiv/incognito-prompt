@@ -1,0 +1,44 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build Chrome extension
+        run: |
+          mkdir -p dist/chrome
+          cp manifest.json content.js background.js popup.html popup.js options.html options.js dist/chrome/
+          cp -r icons dist/chrome/
+          cd dist/chrome
+          zip -r ../incognito-prompt-chrome.zip .
+
+      - name: Build Firefox extension
+        run: |
+          mkdir -p dist/firefox
+          cp manifest.json content.js background.js popup.html popup.js options.html options.js dist/firefox/
+          cp -r icons dist/firefox/
+          cd dist/firefox
+          jq '. + {browser_specific_settings: {gecko: {id: "incognito-prompt@pkdiv.com", strict_min_version: "109.0"}}}' manifest.json > manifest.tmp
+          mv manifest.tmp manifest.json
+          zip -r ../incognito-prompt-firefox.zip .
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: extension-packages
+          path: dist/*.zip
+
+      - uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: dist/*.zip
+          generate_release_notes: true

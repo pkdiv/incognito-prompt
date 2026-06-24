@@ -35,7 +35,7 @@ Since Incognito Prompt is currently in active development, you can load it local
 │   ├── icon16.png
 │   ├── icon48.png
 │   └── icon128.png
-├── AGENTS.ms           # Context & guidelines for AI coding assistants
+├── AGENTS.md           # Context & guidelines for AI coding assistants
 └── README.md           # Project documentation
 ```
 
