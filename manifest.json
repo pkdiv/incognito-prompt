@@ -4,7 +4,6 @@
   "version": "1.0.0",
   "description": "Strips sensitive data (file paths, project names, PII) from prompts before they reach LLMs.",
   "permissions": [
-    "clipboardRead",
     "storage"
   ],
   "host_permissions": [
